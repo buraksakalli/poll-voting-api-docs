@@ -1,0 +1,166 @@
+openapi: 3.0.0
+info:
+  title: sabbar
+  version: 1.0.0
+  contact:
+    name: Burak Sakalli
+    url: https://buraksakalli.org
+    email: burak@buraksakalli.org
+  termsOfService: https://buraksakalli.org
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:3001
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /entry:
+    post:
+      tags:
+        - default
+      summary: Create an Entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                poll_id: 632eeba27e654989962c2cbb
+                option: test
+        description: Create an Entry
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzJmODZlNTU0NTI0NDRhYWJmMDhmYjMiLCJmdWxsbmFtZSI6IkJ1cmFrIFNha2FsbGkiLCJpYXQiOjE2NjQxMDAyMTN9.lshiBl7gp6_esGupweeAJ6OW4l5xMZ-NYF_iJlqkr9k
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+      description: Create an Entry
+  /users:
+    post:
+      tags:
+        - default
+      summary: Create a User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                fullname: Burak Sakalli
+                email: test2@test.com
+                password: test123
+                username: burak
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - default
+      summary: List of Users
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzJmODZlNTU0NTI0NDRhYWJmMDhmYjMiLCJmdWxsbmFtZSI6IkJ1cmFrIFNha2FsbGkiLCJpYXQiOjE2NjQwNTk3NDV9.bOiABukEq25lsJbGXkkTyPD64Zz55i_NlvvQQkY2W4Q
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /login:
+    post:
+      tags:
+        - default
+      summary: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: test2@test.com
+                password: test123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /auth:
+    post:
+      tags:
+        - default
+      summary: Auth
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzJmODZlNTU0NTI0NDRhYWJmMDhmYjMiLCJmdWxsbmFtZSI6IkJ1cmFrIFNha2FsbGkiLCJpYXQiOjE2NjQwNTk3NDV9.bOiABukEq25lsJbGXkkTyPD64Zz55i_NlvvQQkY2W4Q
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /polls:
+    post:
+      tags:
+        - default
+      summary: Create a new poll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                expiry_date: '2022-09-28T20:00:00.000+00:00'
+                user_id: 632f4d16e618d29c82e92518
+                options:
+                  - Perfect
+                  - Good
+                  - Bad
+                slug: how-is-the-design-3
+                title: How is the design 3?
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - default
+      summary: List of Polls
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /polls/how-is-the-design-2:
+    get:
+      tags:
+        - default
+      summary: Get Poll by Slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
